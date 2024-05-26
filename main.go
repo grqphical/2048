@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"strings"
 	"time"
 )
 
@@ -38,27 +37,20 @@ func main() {
 
 		fmt.Print("Move (WASD to shift the board, Q to quit): ")
 		command, _ := reader.ReadString('\n')
-		command = strings.TrimSuffix(strings.ToLower(command), "\n")
 
-		if len(command) != 1 {
-			fmt.Println("Invalid command. Command must be W, A, S, or D")
-			time.Sleep(1 * time.Second)
-			continue
-		}
-
-		switch command {
-		case "w":
+		switch command[0] {
+		case 'w':
 			state.ShiftUp()
-		case "s":
+		case 's':
 			state.ShiftDown()
-		case "a":
+		case 'a':
 			state.ShiftLeft()
-		case "d":
+		case 'd':
 			state.ShiftRight()
-		case "q":
+		case 'q':
 			os.Exit(0)
 		default:
-			fmt.Println("Invalid command. Command must be W, A, S, or D")
+			fmt.Println("Invalid command. Command must be W, A, S, D, or Q")
 			time.Sleep(1 * time.Second)
 			continue
 		}
